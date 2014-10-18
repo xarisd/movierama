@@ -1,5 +1,17 @@
-source 'https://rubygems.org'
+source ENV.fetch('GEM_SOURCE', 'https://rubygems.org')
 
+
+# App runner
+gem 'foreman'
+
+# Use unicorn as the app server
+gem 'unicorn'
+
+# Use Redis as backing store
+gem 'ohm'
+
+# Use Redis as cache
+# gem 'redis-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
@@ -16,20 +28,21 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+gem 'devise' # Authentication
+gem 'cancan' # Authorisation
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+# Debugger
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-doc'
 
+
+group :test do
+  gem 'guard-rspec'    # Continuous testing
+  gem 'rspec-rails'    # Test framework with Rail extensions
+  gem 'poltergeist'    # Driver for PhantomJS headless browser
+  gem 'capybara'       # DSL for browser control
+end
