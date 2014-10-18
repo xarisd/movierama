@@ -24,8 +24,8 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+# Use Haml for views
+gem 'haml-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -36,8 +36,8 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 
 
-gem 'devise' # Authentication
-gem 'cancan' # Authorisation
+gem 'omniauth' # Authentication
+gem 'cancan'   # Authorisation
 
 
 # Debugger
