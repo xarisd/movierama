@@ -29,6 +29,8 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.2)
     cancan (1.6.10)
     capybara (2.4.4)
@@ -59,6 +61,11 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.2.2)
     ffi (1.9.6)
@@ -144,6 +151,24 @@ GEM
       ffi (>= 0.5.0)
     redic (1.1.1)
       hiredis
+    redis (3.1.0)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
+    request_store (1.1.0)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
     rspec (3.1.0)
@@ -209,10 +234,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   cancan
   capybara
   coffee-rails (~> 4.0.0)
   devise
+  draper
   foreman
   guard-rspec
   jquery-rails
@@ -222,6 +249,7 @@ DEPENDENCIES
   pry-doc
   pry-nav
   rails (= 4.1.6)
+  redis-rails
   rspec-rails
   sass-rails (~> 4.0.3)
   turbolinks
