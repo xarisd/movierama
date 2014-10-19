@@ -14,6 +14,8 @@
       %dd= movie.description
       %dt  Date
       %dd= movie.date
+      %dt  Submitter
+      %dd= movie.user.name
     .mr-movie-voting
       - if current_user.likes?(movie)
         = link_to movie_vote_path(movie), method: :delete do
