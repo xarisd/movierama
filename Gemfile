@@ -1,5 +1,6 @@
 source ENV.fetch('GEM_SOURCE', 'https://rubygems.org')
 
+ruby '2.1.2'
 
 # App runner
 gem 'foreman'
