@@ -67,6 +67,7 @@
                     Hate
             .clearfix
     .col-md-3
-      .btn-group.btn-group-justified
-        %a.btn.btn-primary{ href: new_movie_path }
-          Add movie
+      - if can? :create, Movie
+        .btn-group.btn-group-justified
+          %a.btn.btn-primary{ href: new_movie_path }
+            Add movie
