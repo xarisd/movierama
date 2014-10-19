@@ -10,6 +10,9 @@ gem 'dotenv-rails', groups: [:development, :test]
 # Use unicorn as the app server
 gem 'unicorn'
 
+# Productio nmonitoring
+gem 'newrelic_rpm'
+
 # Use Redis as backing store
 gem 'ohm'
 gem 'ohm-contrib'
