@@ -3,6 +3,8 @@ source ENV.fetch('GEM_SOURCE', 'https://rubygems.org')
 
 # App runner
 gem 'foreman'
+# .env files loading
+gem 'dotenv-rails', groups: %i(development test)
 
 # Use unicorn as the app server
 gem 'unicorn'
