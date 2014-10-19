@@ -52,6 +52,6 @@ Run the application on the corresponding port:
 
     $ ./bin/rails server -p 24675
 
-Then point your browser to https://127.0.0.1
+Then point your browser to https://127.0.0.1:24676
 
 Enjoy!
