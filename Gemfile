@@ -5,7 +5,7 @@ ruby '2.1.2'
 # App runner
 gem 'foreman'
 # .env files loading
-gem 'dotenv-rails', groups: %i(development test)
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Use unicorn as the app server
 gem 'unicorn'
