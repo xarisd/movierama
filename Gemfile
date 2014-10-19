@@ -12,6 +12,9 @@ gem 'unicorn'
 
 # Productio nmonitoring
 gem 'newrelic_rpm'
+# Fixes Rails architecture kludges
+gem 'rails_12factor', group: :production
+
 
 # Use Redis as backing store
 gem 'ohm'
