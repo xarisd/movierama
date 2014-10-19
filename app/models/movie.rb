@@ -1,4 +1,5 @@
 class Movie < BaseModel
+  include Ohm::Timestamps
 
   attribute :title
   attribute :date

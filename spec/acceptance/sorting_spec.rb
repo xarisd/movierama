@@ -16,6 +16,7 @@ RSpec.describe 'sort movie list', type: :feature do
       title:        'Empire strikes back',
       description:  'Who\'s scruffy-looking?',
       date:         '1980-05-21',
+      created_at:   Time.parse('2014-10-01 10:30 UTC').to_i,
       user:         author,
       liker_count:  50,
       hater_count:  2
@@ -24,6 +25,7 @@ RSpec.describe 'sort movie list', type: :feature do
       title:        'Teenage mutant nija turtles',
       description:  'Technically, we\'re turtles.',
       date:         '2014-10-17',
+      created_at:   Time.parse('2014-10-01 10:35 UTC').to_i,
       user:         author,
       liker_count:  1,
       hater_count:  237
@@ -49,7 +51,7 @@ RSpec.describe 'sort movie list', type: :feature do
 
   it 'can sort by date' do
     page.sort_by('date')
-    expect(page.movie_titles).to eq(@titles)
+    expect(page.movie_titles).to eq(@titles.reverse)
   end
 end
 

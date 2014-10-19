@@ -1,4 +1,5 @@
 class User < BaseModel
+  include Ohm::Timestamps
 
   attribute :name
 

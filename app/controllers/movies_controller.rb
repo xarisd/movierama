@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
     when 'haters'
       scope.sort(by: 'Movie:*->hater_count', order: 'DESC')
     when 'date'
-      scope.sort(by: 'Movie:*->date', order: 'ALPHA ASC')
+      scope.sort(by: 'Movie:*->created_at',  order: 'DESC')
     end
   end
 
@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
     attrs = params.
       slice(:title, :description, :date).
       merge(user: current_user)
-    Movie.create(attrs)
+    @movie = Movie.create(attrs)
     flash[:notice] = "Movie added"
     redirect_to root_url
   end

@@ -19,15 +19,16 @@
 - @movies.each do |movie|
   - movie = MovieDecorator.new(movie)
   .mr-movie
-    %dl
-      %dt  Title
-      %dd.mr-movie-title= movie.title
+    %h3.mr-movie-title= movie.title
+    %p
+      Posted by
+      = link_to movie.user.name, user_movies_path(movie.user.id)
+      = time_ago_in_words(movie.created_at)
+      ago
       %dt  Description
       %dd= movie.description
       %dt  Date
       %dd= movie.date
-      %dt  Submitter
-      %dd= link_to movie.user.name, user_movies_path(movie.user.id)
     .mr-movie-votes
       - if movie.has_votes?
         = pluralize(movie.count_likers, 'liker')

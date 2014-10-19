@@ -11,6 +11,7 @@ gem 'unicorn'
 
 # Use Redis as backing store
 gem 'ohm'
+gem 'ohm-contrib'
 
 # ♥︎ thin models
 gem 'draper'

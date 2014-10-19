@@ -31,12 +31,14 @@ class UserRegistration
       @user    = user
       @created = false
     else
-      @user    = User.create(uid: uid, name: @auth_hash['info']['name'])
+      @user = User.create(
+        uid:        uid, 
+        name:       @auth_hash['info']['name'],
+        created_at: Time.current.utc.to_i
+      )
       @created = true
     end
 
     @ran = true
-  rescue => e
-    binding.pry
   end
 end

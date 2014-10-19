@@ -122,6 +122,8 @@ GEM
       msgpack
       nido
       redic
+    ohm-contrib (2.0.0)
+      ohm (~> 2.0.0)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -262,6 +264,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   ohm
+  ohm-contrib
   omniauth
   omniauth-github
   poltergeist
