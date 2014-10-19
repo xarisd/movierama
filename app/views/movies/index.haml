@@ -5,12 +5,21 @@
 
 %h2 Movies
 
-- Movie.all.each do |movie|
+.mr-sorter
+  Sort by
+  -# - binding.pry
+  = link_to('likers', root_path(by: 'likers'))
+  |
+  = link_to('haters', root_path(by: 'haters'))
+  |
+  = link_to('date', root_path(by: 'date'))
+
+- @movies.each do |movie|
   - movie = MovieDecorator.new(movie)
   .mr-movie
     %dl
       %dt  Title
-      %dd= movie.title
+      %dd.mr-movie-title= movie.title
       %dt  Description
       %dd= movie.description
       %dt  Date

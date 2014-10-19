@@ -4,8 +4,8 @@ module Pages
   class MovieList
     include Capybara::DSL
 
-    def open
-      visit('/')
+    def open(params = {})
+      visit("/?#{params.to_param}")
     end
 
     def like(title)
@@ -30,6 +30,16 @@ module Pages
       within(_movie_node(title)) do
         click_on 'Unhate'
       end
+    end
+
+    def sort_by(attr)
+      within(page.find('.mr-sorter')) do
+        click_on(attr)
+      end
+    end
+
+    def movie_titles
+      page.all('.mr-movie-title').map(&:text)
     end
 
     def has_vote_message?

@@ -4,7 +4,7 @@ require 'support/pages/movie_list'
 require 'support/pages/movie_new'
 require 'support/with_user'
 
-RSpec.describe 'submit movie', type: :feature do
+RSpec.describe 'vote on movies', type: :feature do
 
   let(:page) { Pages::MovieList.new }
 

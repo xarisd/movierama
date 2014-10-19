@@ -10,4 +10,7 @@ class User < BaseModel
   # Session token
   attribute :token
   index     :token
+
+  # Submitted movies
+  collection :movies, :Movie
 end
