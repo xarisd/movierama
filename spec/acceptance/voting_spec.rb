@@ -15,10 +15,16 @@ RSpec.describe 'submit movie', type: :feature do
     with_logged_in_user
 
     before do
+      author = User.create(
+        uid:  'null|12345',
+        name: 'Bob'
+      )
       Movie.create(
-        title: 'Empire strikes back',
-        description: 'Who\'s scruffy-looking?',
-        date: '1980-05-21')
+        title:        'Empire strikes back',
+        description:  'Who\'s scruffy-looking?',
+        date:         '1980-05-21',
+        user:         author
+      )
     end
 
     before { page.open }
@@ -48,7 +54,7 @@ RSpec.describe 'submit movie', type: :feature do
     it 'cannot like twice' do
       expect {
         2.times { page.like('Empire strikes back') }
-      }.to raise(Capybara::ElementNotFound)
+      }.to raise_error(Capybara::ElementNotFound)
     end
 
     it 'cannot like own movies'
