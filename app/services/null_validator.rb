@@ -1,3 +1,4 @@
+# A validator that always passes and has no errors.
 class NullValidator
   include Singleton
 

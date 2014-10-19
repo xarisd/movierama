@@ -1,3 +1,4 @@
+# Mimics ActiveModel::Validator (to an extent)
 class MovieValidator
   def initialize(movie)
     @movie = movie

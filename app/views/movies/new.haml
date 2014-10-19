@@ -6,7 +6,6 @@
         %h2 Submit a movie
   .row
     .col-md-9
-      -# - binding.pry
       = form_tag movies_path, { class: 'form', role: 'form' } do
         .form-group{ class: @validator.class_for(:title) }
           %label{ for:  'title' } Title
