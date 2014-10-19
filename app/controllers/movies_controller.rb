@@ -18,6 +18,8 @@ class MoviesController < ApplicationController
   end
 
   def new
+    @movie = Movie.new
+    @validator = NullValidator.instance
     # TODO: authorize
   end
 
@@ -26,8 +28,16 @@ class MoviesController < ApplicationController
     attrs = params.
       slice(:title, :description, :date).
       merge(user: current_user)
-    @movie = Movie.create(attrs)
-    flash[:notice] = "Movie added"
-    redirect_to root_url
+    @movie = Movie.new(attrs)
+    @validator = MovieValidator.new(@movie)
+
+    if @validator.valid?
+      @movie.save
+      flash[:notice] = "Movie added"
+      redirect_to root_url
+    else
+      flash[:error] = "Errors were detected"
+      render 'new'
+    end
   end
 end

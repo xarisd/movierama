@@ -20,6 +20,10 @@ module Pages
     def has_movie_creation_message?
       page.has_content?('Movie added')
     end
+
+    def has_error_message?
+      page.has_content?('Errors were detected')
+    end
   end
 end
 

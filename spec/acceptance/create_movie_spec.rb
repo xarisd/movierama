@@ -25,7 +25,13 @@ RSpec.describe 'submit movie', type: :feature do
 
     it 'makes the movie visible on the home page'
 
-    it 'fails without a date'
+    it 'fails without a date' do
+      page.submit(
+        title:       'Bridge over river Kwai',
+        description: 'Boom!',
+        date:        nil)
+      expect(page).to have_error_message
+    end
   end
 
 end
