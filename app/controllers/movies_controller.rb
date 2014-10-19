@@ -18,13 +18,15 @@ class MoviesController < ApplicationController
   end
 
   def new
+    authorize! :create, Movie
+
     @movie = Movie.new
     @validator = NullValidator.instance
-    # TODO: authorize
   end
 
   def create
-    # TODO: authorize
+    authorize! :create, Movie
+
     attrs = _create_params.merge(user: current_user)
     @movie = Movie.new(attrs)
     @validator = MovieValidator.new(@movie)

@@ -1,10 +1,14 @@
 class VotesController < ApplicationController
   def create
+    authorize! :vote, _movie
+
     _voter.vote(_type)
     redirect_to root_path, notice: 'Vote cast'
   end
 
   def destroy
+    authorize! :vote, _movie
+
     _voter.unvote
     redirect_to root_path, notice: 'Vote withdrawn'
   end
@@ -24,6 +28,6 @@ class VotesController < ApplicationController
   end
 
   def _movie
-    Movie[params[:movie_id]]
+    @_movie ||= Movie[params[:movie_id]]
   end
 end
