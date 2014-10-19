@@ -1,13 +1,13 @@
 class MoviesController < ApplicationController
   def index
-    if params[:user_id]
-      @submitter = User[params[:user_id]]
+    if _index_params[:user_id]
+      @submitter = User[_index_params[:user_id]]
       scope = Movie.find(user_id: @submitter.id)
     else
       scope = Movie.all
     end
 
-    @movies = case params.fetch(:by, 'likers')
+    @movies = case _index_params.fetch(:by, 'likers')
     when 'likers'
       scope.sort(by: 'Movie:*->liker_count', order: 'DESC')
     when 'haters'
@@ -25,9 +25,7 @@ class MoviesController < ApplicationController
 
   def create
     # TODO: authorize
-    attrs = params.
-      slice(:title, :description, :date).
-      merge(user: current_user)
+    attrs = _create_params.merge(user: current_user)
     @movie = Movie.new(attrs)
     @validator = MovieValidator.new(@movie)
 
@@ -39,5 +37,15 @@ class MoviesController < ApplicationController
       flash[:error] = "Errors were detected"
       render 'new'
     end
+  end
+
+  private
+
+  def _index_params
+    params.permit(:by, :user_id)
+  end
+
+  def _create_params
+    params.permit(:title, :description, :date)
   end
 end

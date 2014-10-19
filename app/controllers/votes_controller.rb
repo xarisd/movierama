@@ -16,7 +16,7 @@ class VotesController < ApplicationController
   end
 
   def _type
-    case params[:t]
+    case params.require(:t)
     when 'like' then :like
     when 'hate' then :hate
     else raise
