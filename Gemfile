@@ -15,6 +15,8 @@ gem 'newrelic_rpm'
 # Fixes Rails architecture kludges
 gem 'rails_12factor', group: :production
 
+# Forces SSL usage
+gem 'rack-ssl'
 
 # Use Redis as backing store
 gem 'ohm'
