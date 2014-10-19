@@ -1,12 +1,19 @@
 class MoviesController < ApplicationController
   def index
+    if params[:user_id]
+      @submitter = User[params[:user_id]]
+      scope = Movie.find(user_id: @submitter.id)
+    else
+      scope = Movie.all
+    end
+
     @movies = case params.fetch(:by, 'likers')
     when 'likers'
-      Movie.all.sort(by: 'Movie:*->liker_count', order: 'DESC')
+      scope.sort(by: 'Movie:*->liker_count', order: 'DESC')
     when 'haters'
-      Movie.all.sort(by: 'Movie:*->hater_count', order: 'DESC')
+      scope.sort(by: 'Movie:*->hater_count', order: 'DESC')
     when 'date'
-      Movie.all.sort(by: 'Movie:*->date', order: 'ALPHA ASC')
+      scope.sort(by: 'Movie:*->date', order: 'ALPHA ASC')
     end
   end
 

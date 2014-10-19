@@ -7,7 +7,7 @@
     = csrf_meta_tags
   %body
     .header
-      %h1 MovieRama
+      %h1= link_to 'MovieRama', root_path
       .login-panel
         - if current_user
           #username= current_user.name

@@ -3,16 +3,18 @@
   = link_to new_movie_path do
     Add movie
 
-%h2 Movies
+- if @submitter
+  %h2 Movies submitted by #{@submitter.name}
+- else
+  %h2 Movies
 
 .mr-sorter
   Sort by
-  -# - binding.pry
-  = link_to('likers', root_path(by: 'likers'))
+  = link_to('likers', by: 'likers')
   |
-  = link_to('haters', root_path(by: 'haters'))
+  = link_to('haters', by: 'haters')
   |
-  = link_to('date', root_path(by: 'date'))
+  = link_to('date', by: 'date')
 
 - @movies.each do |movie|
   - movie = MovieDecorator.new(movie)
@@ -25,7 +27,7 @@
       %dt  Date
       %dd= movie.date
       %dt  Submitter
-      %dd= movie.user.name
+      %dd= link_to movie.user.name, user_movies_path(movie.user.id)
     .mr-movie-votes
       - if movie.has_votes?
         = pluralize(movie.count_likers, 'liker')
