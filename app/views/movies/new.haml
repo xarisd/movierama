@@ -1,16 +1,22 @@
 
-
-= form_tag movies_path do
-  .form-group
-    %label{ for:  'title' } Title
-    %input{ name: 'title' }
-  .form-group
-    %label{ for: 'description' } Description
-    %textarea{ name: 'description' }
-  .form-group
-    %label{ for:  'date' } Date
-    %input{ name: 'date', type: 'date' }
-  .form-group
-    = submit_tag 'Add movie'
- 
+.container
+  .row
+    .col-md-12
+      .page-header
+        %h2 Submit a movie
+  .row
+    .col-md-9
+      = form_tag movies_path, { class: 'form', role: 'form' } do
+        .form-group
+          %label{ for:  'title' } Title
+          %input.form-control{ name: 'title' }
+        .form-group
+          %label{ for: 'description' } Description
+          %textarea.form-control{ name: 'description' }
+        .form-group
+          %label{ for:  'date' } Date
+          %input.form-control{ name: 'date', type: 'date' }
+        .form-group
+          = submit_tag 'Add movie', class: 'btn btn-primary'
+       
 
