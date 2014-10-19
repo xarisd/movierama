@@ -1,27 +1,13 @@
 require 'rails_helper'
 require 'capybara/rails'
 require 'support/pages/home'
+require 'support/with_user'
 
 RSpec.describe 'login/logout/signup', type: :feature do
+  with_auth_mock
+
   let(:page) { Pages::Home.new }
-
-  # setup Omniauth stubbing
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.add_mock(
-      :github,
-      uid: '12345',
-      info: {
-        name: 'John McFoo'
-      }
-    )
-  end
-
-  before do
-    page.open
-    # configure Omniauth to know about user "john mcfoo"
-  end
-
+  before { page.open }
 
   it 'signs up' do
     page.sign_up

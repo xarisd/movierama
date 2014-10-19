@@ -1,0 +1,16 @@
+
+
+= form_tag movies_path do
+  .form-group
+    %label{ for:  'title' } Title
+    %input{ name: 'title' }
+  .form-group
+    %label{ for: 'description' } Description
+    %textarea{ name: 'description' }
+  .form-group
+    %label{ for:  'date' } Date
+    %input{ name: 'date', type: 'date' }
+  .form-group
+    = submit_tag 'Add movie'
+ 
+
