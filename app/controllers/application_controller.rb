@@ -21,12 +21,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= begin
-      if token = session[:token]
-        user = User.find(token: token).first
-        UserDecorator.new(user)
-      else
-        nil
-      end
+      return unless token = session[:token]
+      user = User.find(token: token).first
+      return unless user
+      UserDecorator.new(user)
     end
   end
 end

@@ -6,6 +6,7 @@ module Pages
 
     def open
       visit('/movies/new')
+      self
     end
 
     def submit(title:, description:, date:)
@@ -13,6 +14,7 @@ module Pages
       fill_in 'description', with: description
       fill_in 'date',        with: date
       click_on 'Add movie'
+      self
     end
 
     def has_movie_creation_message?

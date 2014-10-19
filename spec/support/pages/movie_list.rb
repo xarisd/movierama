@@ -43,7 +43,7 @@ module Pages
     private
 
     def _movie_node(title)
-      page.all('.mr-movie').first { |n| n.has_content?(title) }
+      page.all('.mr-movie').find { |n| n.has_content?(title) }
     end
   end
 end

@@ -6,6 +6,7 @@
 %h2 Movies
 
 - Movie.all.each do |movie|
+  - movie = MovieDecorator.new(movie)
   .mr-movie
     %dl
       %dt  Title
@@ -16,16 +17,26 @@
       %dd= movie.date
       %dt  Submitter
       %dd= movie.user.name
-    .mr-movie-voting
-      - if current_user.likes?(movie)
-        = link_to movie_vote_path(movie), method: :delete do
-          Unlike
-      - elsif current_user.hates?(movie)
-        = link_to movie_vote_path(movie), method: :delete do
-          Unhate
-      - else
-        = link_to movie_vote_path(movie, t:'like'), method: :post do
-          Like
+    .mr-movie-votes
+      - if movie.has_votes?
+        = pluralize(movie.count_likers, 'liker')
         |
-        = link_to movie_vote_path(movie, t:'hate'), method: :post do
-          Hate
+        = pluralize(movie.count_haters, 'hater')
+      - elsif can?(:vote, movie)
+        Be the first to vote for this movie
+      - else
+        No votes yet
+    - if current_user && can?(:vote, movie)
+      .mr-movie-voting
+        - if current_user.likes?(movie)
+          = link_to movie_vote_path(movie), method: :delete do
+            Unlike
+        - elsif current_user.hates?(movie)
+          = link_to movie_vote_path(movie), method: :delete do
+            Unhate
+        - else
+          = link_to movie_vote_path(movie, t:'like'), method: :post do
+            Like
+          |
+          = link_to movie_vote_path(movie, t:'hate'), method: :post do
+            Hate
