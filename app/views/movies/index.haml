@@ -14,4 +14,16 @@
       %dd= movie.description
       %dt  Date
       %dd= movie.date
-
+    .mr-movie-voting
+      - if current_user.likes?(movie)
+        = link_to movie_vote_path(movie), method: :delete do
+          Unlike
+      - elsif current_user.hates?(movie)
+        = link_to movie_vote_path(movie), method: :delete do
+          Unhate
+      - else
+        = link_to movie_vote_path(movie, t:'like'), method: :post do
+          Like
+        |
+        = link_to movie_vote_path(movie, t:'hate'), method: :post do
+          Hate

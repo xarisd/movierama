@@ -1,6 +1,4 @@
-require 'ohm'
-
-class User < Ohm::Model
+class User < BaseModel
 
   attribute :name
 

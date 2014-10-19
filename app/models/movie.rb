@@ -1,6 +1,4 @@
-require 'ohm'
-
-class Movie < Ohm::Model
+class Movie < BaseModel
 
   attribute :title
   attribute :date
