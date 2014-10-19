@@ -12,4 +12,8 @@ class MovieDecorator < Draper::Decorator
   def count_haters
     object.haters.size
   end
+
+  def date
+    Date.parse(object.date).to_s(:long)
+  end
 end

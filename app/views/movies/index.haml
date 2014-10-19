@@ -25,10 +25,10 @@
       = link_to movie.user.name, user_movies_path(movie.user.id)
       = time_ago_in_words(movie.created_at)
       ago
-      %dt  Description
-      %dd= movie.description
-      %dt  Date
-      %dd= movie.date
+    %p.mr-movie-description= movie.description
+    %p.mr-release-date
+      Released
+      = movie.date
     .mr-movie-votes
       - if movie.has_votes?
         = pluralize(movie.count_likers, 'liker')

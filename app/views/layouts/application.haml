@@ -27,10 +27,4 @@
 
     = yield
 
-    %hr/
-    %p Current user:
-    %pre= current_user.inspect
-    %p Session data:
-    - session.to_hash.each_pair do |k,v|
-      %pre= "#{k}: #{v}"
 
