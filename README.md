@@ -57,6 +57,16 @@ Then point your browser to https://127.0.0.1:24676
 Enjoy!
 
 
+#### Getting authentication to work
+
+Login/signup use Omniauth with Github as a provider. If you're using Pow and the
+`movierama.dev` host (recommended), you're all set.
+
+If not, you'll need to get your own OAuth tokens from Github and edit
+`.env` appropriately.
+
+
+
 ### Screenshot
 
 So you know what to expect. This app's just a toy, remember?
