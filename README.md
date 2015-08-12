@@ -55,3 +55,10 @@ Run the application on the corresponding port:
 Then point your browser to https://127.0.0.1:24676
 
 Enjoy!
+
+
+### Screenshot
+
+So you know what to expect. This app's just a toy, remember?
+
+![](https://dl.dropboxusercontent.com/spa/cbazgcyvth7jydp/-4eusn-o.png)
