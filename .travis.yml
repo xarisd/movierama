@@ -5,3 +5,5 @@ services:
   - redis-server
 script:
   - bundle exec rspec
+cache:
+  - bundler
