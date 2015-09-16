@@ -34,6 +34,6 @@ class VotingBooth
   end
 
   def _send_notification(movie, voter, preference)
-    VoteNotificationMailer.notification_mail(movie, user, preference).deliver
+    VoteNotificationMailer.notification_mail(movie, voter, preference).deliver
   end
 end
