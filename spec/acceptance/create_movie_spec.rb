@@ -9,7 +9,7 @@ RSpec.describe 'submit movie', type: :feature do
   let(:home) { Pages::Home.new }
 
   context 'when logged out' do
-    it 'fails' do
+    it 'does not show the add movie button' do
       expect{
         click_on 'Add movie'
       }.to raise_error(Capybara::ElementNotFound)
@@ -32,7 +32,7 @@ RSpec.describe 'submit movie', type: :feature do
       page.submit(
         title:       'The Room',
         description: 'You are tearing me apart Lisa!',
-        date:        '2003-06-23')
+        date:        '2003-06-27')
       home.open
       expect(home).to have_movie_title 'The Room'
     end
