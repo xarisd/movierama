@@ -29,11 +29,14 @@ class UserRegistration
 
     if user = User.find(uid: uid).first
       @user    = user
+      ## TODO : (xarisd) In case we want to support updating the user's data we should do it here
+      ##        Issue : https://trello.com/c/wXsf9rWL/7-login-signup-integration-with-github-should-support-updating-user-s-data
       @created = false
     else
       @user = User.create(
-        uid:        uid, 
+        uid:        uid,
         name:       @auth_hash['info']['name'],
+        email:       @auth_hash['info']['email'],
         created_at: Time.current.utc.to_i
       )
       @created = true
