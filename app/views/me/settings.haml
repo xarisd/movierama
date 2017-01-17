@@ -1,0 +1,17 @@
+
+.container
+  .row
+    .col-md-12
+      .page-header
+        %h2 Change your settings
+  .row
+    .col-md-9
+      = form_tag settings_path, { class: 'form', role: 'form' } do
+        .form-group
+          .checkbox
+            %label
+              %input.form-control{ name: 'notify_for_like', type: 'checkbox', value: 1, checked: @user_settings[:notify_for_like] } Notify me by email when someone Likes one of my movies
+        .form-group
+        %br
+        .form-group
+          = submit_tag 'Save settings', class: 'btn btn-primary'

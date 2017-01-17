@@ -39,6 +39,12 @@ module RspecSupportWithUser
       expect(user.name).to eq "John McFoo"
       expect(user.email).to eq "john@example.com"
     end
+
+    # Checks that the logged in user has the correct settings in the db
+    def check_settings_for_logged_in_user(notify_for_like: )
+      user = User.find(uid: 'github|12345').first
+      expect(user.notify_for_like).to eq notify_for_like
+    end
   end
 
 end
