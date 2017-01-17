@@ -11,7 +11,8 @@ RSpec.describe 'vote on movies', type: :feature do
   before do
     author = User.create(
       uid:  'null|12345',
-      name: 'Bob'
+      name: 'Bob',
+      email: 'bob@example.com',
     )
     Movie.create(
       title:        'Empire strikes back',
@@ -33,37 +34,74 @@ RSpec.describe 'vote on movies', type: :feature do
   context 'when logged in' do
     with_logged_in_user
 
-    before { page.open }
+    before {
+      ActionMailer::Base.deliveries = []
+      page.open
+      expect(ActionMailer::Base.deliveries).to be_empty
+    }
 
     it 'can like' do
+      # 1. Like the page as 'John'
       page.like('Empire strikes back')
+
+      # 2. Check that the page has votes
       expect(page).to have_vote_message
+
+      # 3. Check that an email is sent
+      last_email = ActionMailer::Base.deliveries.last
+      expect(last_email).not_to be nil
+      expect(last_email.to).to eq ['bob@example.com']
+      expect(last_email.subject).to have_content 'Hey Bob'
     end
 
     it 'can hate' do
       page.hate('Empire strikes back')
       expect(page).to have_vote_message
+
+      # Check that there is no email sent at the end. Emails are sent only for Likes!
+      expect(ActionMailer::Base.deliveries).to be_empty
     end
 
     it 'can unlike' do
       page.like('Empire strikes back')
+
+      # Reset the mailer after the like cause at this point an email is sent as expected.
+      ActionMailer::Base.deliveries = []
+      expect(ActionMailer::Base.deliveries).to be_empty
+
+      # Try to Unlike
       page.unlike('Empire strikes back')
       expect(page).to have_unvote_message
+
+      # Check that there is no email sent at the end. Emails are sent only for Likes!
+      expect(ActionMailer::Base.deliveries).to be_empty
     end
 
     it 'can unhate' do
       page.hate('Empire strikes back')
       page.unhate('Empire strikes back')
       expect(page).to have_unvote_message
+
+      # Check that there is no email sent at the end. Emails are sent only for Likes!
+      expect(ActionMailer::Base.deliveries).to be_empty
     end
 
     it 'cannot like twice' do
+      # 1. Try to like twice
       expect {
         2.times { page.like('Empire strikes back') }
       }.to raise_error(Capybara::ElementNotFound)
+
+      # 3. Check that ONLY ONE email is sent at the end
+      expect(ActionMailer::Base.deliveries.size).to eq 1
+      last_email = ActionMailer::Base.deliveries.last
+      expect(last_email).not_to be nil
+      expect(last_email.to).to eq ['bob@example.com']
+      expect(last_email.subject).to have_content 'Hey Bob'
     end
 
     it 'cannot like own movies' do
+      # 1. Try to like
       Pages::MovieNew.new.open.submit(
         title:       'The Party',
         date:        '1969-08-13',
@@ -72,6 +110,9 @@ RSpec.describe 'vote on movies', type: :feature do
       expect {
         page.like('The Party')
       }.to raise_error(Capybara::ElementNotFound)
+
+      # Check that there is no email sent at the end.
+      expect(ActionMailer::Base.deliveries).to be_empty
     end
   end
 
