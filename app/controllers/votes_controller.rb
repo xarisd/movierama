@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   def create
     authorize! :vote, _movie
 
-    _voter.vote(_type)
+    _voter.vote(_type, is_it_real: true)
     redirect_to root_path, notice: 'Vote cast'
   end
 
