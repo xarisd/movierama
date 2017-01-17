@@ -8,7 +8,8 @@ module RspecSupportWithUser
         :github,
         uid: '12345',
         info: {
-          name: 'John McFoo'
+          name: 'John McFoo',
+          email: 'john@example.com',
         }
       )
     end
@@ -36,6 +37,7 @@ module RspecSupportWithUser
     def check_expectations_for_logged_in_user()
       user = User.find(uid: 'github|12345').first
       expect(user.name).to eq "John McFoo"
+      expect(user.email).to eq "john@example.com"
     end
   end
 
