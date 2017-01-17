@@ -5,7 +5,7 @@ module Pages
     def sign_up
       click_on('Sign up')
     end
-    
+
     def login
       click_on('Log in')
     end
@@ -29,6 +29,26 @@ module Pages
 
     def has_signup_message?
       has_content?('Account created')
+    end
+
+    # Checks that the page header has proper links:
+    #   - `Settings`
+    #   - `Log out`
+    def has_proper_links_as_logged_in?
+      result = false
+      result |= find("a", text: "Settings")
+      result |= find("a", text: "Log out")
+      result
+    end
+
+    # Checks that the page header has proper links:
+    #   - `Sign up`
+    #   - `Log in`
+    def has_proper_links_as_logged_out?
+      result = false
+      result |= find("a", text: "Sign up")
+      result |= find("a", text: "Log in")
+      result
     end
   end
 end

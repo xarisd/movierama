@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   resource :session, only: %i(create destroy)
   get '/auth/:provider/callback', to: 'sessions#create'
 
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :users, only: %i() do
     resources :movies, only: %(index), controller: 'movies'
   end
+
+  get '/settings', to: 'me#settings'
+  post '/settings', to: 'me#update_settings'
 
   root 'movies#index'
 end
