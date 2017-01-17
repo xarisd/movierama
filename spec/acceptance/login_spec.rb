@@ -13,6 +13,7 @@ RSpec.describe 'login/logout/signup', type: :feature do
     page.sign_up
     expect(page).to have_logged_in('John McFoo')
     expect(page).to have_signup_message
+    check_expectations_for_logged_in_user
   end
 
   it 'logs out' do
@@ -27,5 +28,6 @@ RSpec.describe 'login/logout/signup', type: :feature do
     page.login
     expect(page).to have_logged_in('John McFoo')
     expect(page).to have_login_message
+    check_expectations_for_logged_in_user
   end
 end
