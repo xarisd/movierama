@@ -32,9 +32,11 @@ module Pages
     end
 
     # Checks that the page header has proper links:
+    #   - `Settings`
     #   - `Log out`
     def has_proper_links_as_logged_in?
       result = false
+      result |= find("a", text: "Settings")
       result |= find("a", text: "Log out")
       result
     end
