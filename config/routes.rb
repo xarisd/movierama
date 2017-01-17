@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get '/settings', to: 'me#settings'
+  post '/settings', to: 'me#update_settings'
 
   root 'movies#index'
 end

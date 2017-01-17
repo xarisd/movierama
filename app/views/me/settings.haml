@@ -7,10 +7,11 @@
   .row
     .col-md-9
       = form_tag settings_path, { class: 'form', role: 'form' } do
-        .form-group
+        .form-group{ class: @validator.class_for(:notify_for_like) }
+          %input{ name: 'notify_for_like', type: 'hidden', value: "0" }
           .checkbox
             %label
-              %input.form-control{ name: 'notify_for_like', type: 'checkbox', value: 1, checked: @user_settings[:notify_for_like] } Notify me by email when someone Likes one of my movies
+              %input{ name: 'notify_for_like', type: 'checkbox', value: "1", checked: @user_settings[:notify_for_like] } Notify me by email when someone Likes one of my movies
         .form-group
         %br
         .form-group
