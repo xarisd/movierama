@@ -5,7 +5,7 @@ class VotingBooth
     @movie = movie
   end
 
-  def vote(like_or_hate)
+  def vote(like_or_hate, is_it_real: false)
     set = case like_or_hate
       when :like then @movie.likers
       when :hate then @movie.haters
@@ -14,7 +14,11 @@ class VotingBooth
     unvote # to guarantee consistency
     set.add(@user)
     _update_counts
-    _notify_for_like if like_or_hate == :like # Notify for Like with an email
+
+    if is_it_real # Check that this is from Web...
+      _notify_for_like if like_or_hate == :like # Notify for Like with an email
+    end
+
     self
   end
 
