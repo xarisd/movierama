@@ -9,10 +9,11 @@ RSpec.describe 'vote on movies', type: :feature do
   let(:page) { Pages::MovieList.new }
 
   before do
-    author = User.create(
+    @author = User.create(
       uid:  'null|12345',
       name: 'Bob',
       email: 'bob@example.com',
+      notify_for_like: true,
     )
     Movie.create(
       title:        'Empire strikes back',
@@ -21,6 +22,7 @@ RSpec.describe 'vote on movies', type: :feature do
       user:         author
     )
   end
+  let(:author) { @author }
 
   context 'when logged out' do
     it 'cannot vote' do
@@ -40,18 +42,52 @@ RSpec.describe 'vote on movies', type: :feature do
       expect(ActionMailer::Base.deliveries).to be_empty
     }
 
-    it 'can like' do
-      # 1. Like the page as 'John'
-      page.like('Empire strikes back')
+    context 'can like' do
 
-      # 2. Check that the page has votes
-      expect(page).to have_vote_message
+      it 'and send emails' do
+        # 1. Like the page as 'John'
+        page.like('Empire strikes back')
 
-      # 3. Check that an email is sent
-      last_email = ActionMailer::Base.deliveries.last
-      expect(last_email).not_to be nil
-      expect(last_email.to).to eq ['bob@example.com']
-      expect(last_email.subject).to have_content 'Hey Bob'
+        # 2. Check that the page has votes
+        expect(page).to have_vote_message
+
+        # 3. Check that an email is sent
+        last_email = ActionMailer::Base.deliveries.last
+        expect(last_email).not_to be nil
+        expect(last_email.to).to eq ['bob@example.com']
+        expect(last_email.subject).to have_content 'Hey Bob'
+      end
+
+      context 'without sending emails' do
+        it 'when user settings not allowing it' do
+          # 0. Author has chosen NOT to get notified by email
+          @author.notify_for_like = false
+          @author.save
+
+          # 1. Like the page as 'John'
+          page.like('Empire strikes back')
+
+          # 2. Check that the page has votes
+          expect(page).to have_vote_message
+
+          # 3. Check that there is no email sent at the end.
+          expect(ActionMailer::Base.deliveries).to be_empty
+        end
+        it 'when user has not an email address' do
+          # 0. Author has NOT an email address in her profile
+          @author.email = nil
+          @author.save
+
+          # 1. Like the page as 'John'
+          page.like('Empire strikes back')
+
+          # 2. Check that the page has votes
+          expect(page).to have_vote_message
+
+          # 3. Check that there is no email sent at the end.
+          expect(ActionMailer::Base.deliveries).to be_empty
+        end
+      end
     end
 
     it 'can hate' do

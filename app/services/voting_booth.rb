@@ -37,7 +37,16 @@ class VotingBooth
       hater_count: @movie.haters.size)
   end
 
+  # Notifies the author of the movie for a like
+  #   only if her settings are allowing to do it
+  #   and her email address is updated
   def _notify_for_like
+    # 0. Checks
+    return unless @movie.user # User must be present
+    return unless @movie.user.notify_for_like # User must have chosen in her settings to be notified by email
+    return unless @movie.user.email # User must have an email address
+
+    # 1. Send the email
     # NotificationsMailer.delay(:queue => 'user_notifications').notify_user_for_like(movie_id:, liker_id:)
     NotificationsMailer.notify_user_for_like(movie_id: @movie.id, liker_id: @user.id).deliver
   end
