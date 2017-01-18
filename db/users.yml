@@ -1,9 +1,15 @@
 - name: John McFoo
   uid:  'null|johnmcfoo'
+  email: john@example.xom
+  notify_for_like: true
+
 - name: Alice Wallace
   uid:  'null|alice'
+  email: alice@example.com
+  notify_for_like: false
+
 - name: Bob Ablleton
   uid:  'null|bob'
+
 - name: Charlie O'Callaghan
   uid:  'null|charlie'
-
